@@ -57,13 +57,15 @@ def load_data_and_models():
         df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
         
         # Prepare features and target
-        X = df.drop(['Employee_ID', 'Hire_Date', 'Performance_Score', 'Resigned'], axis=1, errors='ignore')
+        
+        X = df.drop(['Employee_ID', 'Hire_Date', 'Performance_Score', 'Resigned'], axis=1)
         y_performance = df['Performance_Score']
         y_resigned = df['Resigned'].astype(int)
         
         # Split data
+        
         X_train, X_test, y_train_perf, y_test_perf, y_train_res, y_test_res = train_test_split(
-            X, y_performance, y_resigned, test_size=0.2,  _state=42
+            X, y_performance, y_resigned, test_size=0.2, random_state=42
         )
         
         # Train models
